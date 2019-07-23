@@ -1,5 +1,5 @@
-import React, { useCallback, useState, Fragment, useEffect } from 'react'
-import { Marker, InfoWindow } from '@react-google-maps/api'
+import React, { Fragment } from 'react'
+import { Marker } from '@react-google-maps/api'
 // import MapInfoWindow from './MapInfoWindow'
 
 const MapMarker = (props) => {

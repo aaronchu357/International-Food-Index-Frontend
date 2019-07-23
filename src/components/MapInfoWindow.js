@@ -1,12 +1,15 @@
-import React, { Component, useState, useEffect, Fragment } from 'react'
+import React, { Component, Fragment, useState } from 'react'
 import { InfoWindow } from '@react-google-maps/api'
-import NationalDish from './NationalDish'
+import NationalDishExpandedDetails from './NationalDishExpandedDetails'
 import NationalDishContainer from '../containers/NationalDishContainer'
 
 class MapInfoWindow extends Component {
 
   state = {
-    dishes: []
+    dishes: [],
+    nationalDishClicked: false,
+    nationalDishSelected: [],
+    modalShow: false
   }
 
   componentDidMount() {
@@ -35,6 +38,17 @@ class MapInfoWindow extends Component {
     }
   }
 
+  handhandleNationalDishOnClick = (dishData) => {
+    this.setState({
+      nationalDishClicked: true,
+      nationalDishSelected: dishData
+    })
+  }
+
+  setModalShow = (boolean) => {
+    this.setState({modalShow: boolean})
+  }
+
   render() {
     return (
       <>
@@ -43,16 +57,16 @@ class MapInfoWindow extends Component {
           onCloseClick={this.props.handleInfoWindowCloseClick}
         >
           <div style={{
-            background: `white`,
-            border: `1px solid #ccc`,
+            background: 'white',
             padding: 15,
-            maxWidth: 200,
-            maxHeight: 400
+            maxWidth: 300,
+            maxHeight: 200,
           }}>
             <h1>{this.props.locationInfo.attributes.name}</h1>
-            <NationalDishContainer dishes={this.state.dishes} />
+            {!!this.state.dishes ? <NationalDishContainer dishes={this.state.dishes} handhandleNationalDishOnClick={this.handhandleNationalDishOnClick} setModalShow={this.setModalShow}/> : <div>Loading...</div>}
           </div>
-        </InfoWindow>
+        </InfoWindow> 
+        {this.state.nationalDishClicked ? <NationalDishExpandedDetails nationalDishSelected={this.state.nationalDishSelected} show={this.state.modalShow} onHide={() => this.setModalShow(false)}/> : null}
       </>
     )
   }

@@ -1,18 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
+import Button from 'react-bootstrap/Button'
 
-export default class NationalDish extends Component {
+const NationalDish = (props) => {
 
-  state = {
-    clicked: false
+  const handleNationalDishOnClick = () => {
+    props.handhandleNationalDishOnClick(props.dishData)
   }
 
-  render() {
-    return (
-      <li>
-        <img src={this.props.dishData.attributes.image} alt='Not Found' width={50} height={50}/>
-        <h3>{this.props.dishData.attributes.name}</h3>
-        <h4>{this.props.dishData.attributes.description}</h4>
-      </li>
-    )
-  }
+  return (
+    <div class='national-dish' onClick={handleNationalDishOnClick}>
+      <img src={props.dishData.attributes.image} alt='Sorry, Not Found' width={85} height={50} />
+      <h4>{props.dishData.attributes.name}</h4>
+      <p>{props.dishData.attributes.description}</p>
+      <Button className="btn national-dish-info" data-toggle="modal" data-target="#myModal" onClick={() => props.setModalShow(true)}>See Recipes</Button>
+    </div>
+  )
 }
+
+export default NationalDish
