@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { GoogleMap, LoadScript } from '@react-google-maps/api'
 import MarkersContainer from '../containers/MarkersContainer';
 
+class Map extends React.Component {
 
-class Map extends Component {
   render() {
     return (
       <div>
@@ -23,7 +23,7 @@ class Map extends Component {
               lng: -180
             }}
           >
-            <MarkersContainer />
+            <MarkersContainer userInfo={this.props.userInfo} />
           </GoogleMap>
         </LoadScript>
       </div>

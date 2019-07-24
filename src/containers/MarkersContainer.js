@@ -42,7 +42,7 @@ class MarkersContainer extends Component {
 
   render() {
     const generateMarkers = this.state.locationCoordinates.map(location => <MapMarker location={location} handleMarkerOnClick={this.handleMarkerOnClick} />)
-    const generateInfoWindow = <MapInfoWindow locationInfo={this.state.locationInfo} handleInfoWindowCloseClick={this.handleInfoWindowCloseClick}/>
+    const generateInfoWindow = <MapInfoWindow locationInfo={this.state.locationInfo} handleInfoWindowCloseClick={this.handleInfoWindowCloseClick} userInfo={this.props.userInfo}/>
     return (
       <div className='markers-container' >
         {generateMarkers}

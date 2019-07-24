@@ -1,17 +1,21 @@
 import React from 'react'
 import NationalDish from '../components/NationalDish'
 
-const NationalDishContainer = (props) => {
-  const generateDishes = props.dishes.map(dish => {
+class NationalDishContainer extends React.Component {
+
+
+  render() {
+    const generateDishes = this.props.dishes.map(dish => {
+      return (
+        <NationalDish dishData={dish} handhandleNationalDishOnClick={this.props.handhandleNationalDishOnClick} setModalShow={this.props.setModalShow} />
+      )
+    })
     return (
-      <NationalDish dishData={dish} handhandleNationalDishOnClick={props.handhandleNationalDishOnClick} setModalShow={props.setModalShow} />
+      <div className={'national-dishes-container'} >
+        {generateDishes}
+      </div>
     )
-  })
-  return (
-    <div className={'national-dishes-container'} > 
-      {generateDishes}
-    </div>
-  )
+  }
 }
 
 export default NationalDishContainer

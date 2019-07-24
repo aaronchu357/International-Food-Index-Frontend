@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from 'react'
+import React, { Component, Fragment } from 'react'
 import { InfoWindow } from '@react-google-maps/api'
 import NationalDishExpandedDetails from './NationalDishExpandedDetails'
 import NationalDishContainer from '../containers/NationalDishContainer'
@@ -9,7 +9,8 @@ class MapInfoWindow extends Component {
     dishes: [],
     nationalDishClicked: false,
     nationalDishSelected: [],
-    modalShow: false
+    modalShow: false,
+    modalCommentShow: false
   }
 
   componentDidMount() {
@@ -49,6 +50,19 @@ class MapInfoWindow extends Component {
     this.setState({modalShow: boolean})
   }
 
+  setCommentModalShow = (boolean) => {
+    this.setState({modalCommentShow: boolean})
+  }
+
+  addComment = () => {
+    // POST COMMENT
+    if(localStorage.token) {
+      fetch()
+    } else {
+      alert('Must be logged in to add comment.')
+    }
+  }
+
   render() {
     return (
       <>
@@ -63,10 +77,10 @@ class MapInfoWindow extends Component {
             maxHeight: 200,
           }}>
             <h1>{this.props.locationInfo.attributes.name}</h1>
-            {!!this.state.dishes ? <NationalDishContainer dishes={this.state.dishes} handhandleNationalDishOnClick={this.handhandleNationalDishOnClick} setModalShow={this.setModalShow}/> : <div>Loading...</div>}
+            <NationalDishContainer dishes={this.state.dishes} handhandleNationalDishOnClick={this.handhandleNationalDishOnClick} setModalShow={this.setModalShow} />
           </div>
         </InfoWindow> 
-        {this.state.nationalDishClicked ? <NationalDishExpandedDetails nationalDishSelected={this.state.nationalDishSelected} show={this.state.modalShow} onHide={() => this.setModalShow(false)}/> : null}
+        {this.state.nationalDishClicked ? <NationalDishExpandedDetails nationalDishSelected={this.state.nationalDishSelected} addComment={this.addComment} show={this.state.modalShow} onHide={() => this.setModalShow(false)} userInfo={this.props.userInfo}/> : null}
       </>
     )
   }

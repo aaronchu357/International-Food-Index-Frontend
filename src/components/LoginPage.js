@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Button from 'react-bootstrap/Button'
 
 export default class LoginPage extends Component {
 
@@ -7,30 +8,23 @@ export default class LoginPage extends Component {
     password: ''
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    fetch('http://localhost:3000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    })
-      .then(res => res.json())
-      .then(parsedResponse => {
-        localStorage.setItem('token', parsedResponse.token)
-        this.props.history.push('/profile')
-      })
-  }
-
   handleLoginInputOnChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  handleOnClick = () => {
+    this.props.history.push('/')
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.handleSubmit(this.state, this.props.history)
   }
 
   render() {
     return (
       <div className='login'>
+        <Button onClick={this.handleOnClick}>Go Back</Button>
         <form onSubmit={this.handleSubmit}>
           <input type='text' name='username' placeholder='username' onChange={this.handleLoginInputOnChange} />
           <br />

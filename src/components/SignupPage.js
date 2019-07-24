@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Button from 'react-bootstrap/Button'
 
 export default class SignupPage extends Component {
 
@@ -28,10 +29,14 @@ export default class SignupPage extends Component {
       })
   }
 
-
+  handleOnClick = () => {
+    this.props.history.push('/')
+  }
+  
   render() {
     return (
       <div className='signup'>
+        <Button onClick={this.handleOnClick}>Go Back</Button>
         <form onSubmit={this.handleSubmit}>
           <input type='text' name='username' placeholder='username' onChange={this.handleOnChange} />
           <br />
