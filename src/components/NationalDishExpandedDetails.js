@@ -55,7 +55,7 @@ class NationalDishExpandedDetails extends Component {
                   {this.props.nationalDishSelected.attributes.name} Comments
                 </Modal.Title>
               </Modal.Header>
-              <Modal.Body>
+              <Modal.Body style={{'maxHeight': 'calc(100vh - 210px)', 'overflowY': 'auto'}}>
                 <CommentsContainer nationalDishSelected={this.props.nationalDishSelected} userInfo={this.props.userInfo}/>
               </Modal.Body>
               <Modal.Footer>

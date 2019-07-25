@@ -7,26 +7,14 @@ export default class SignupPage extends Component {
     username: '',
     password: ''
   }
-
+  
   handleOnChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    fetch('http://localhost:3000/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    })
-      .then(res => res.json())
-      .then(parsedResponse => {
-        localStorage.setItem('token', parsedResponse.token)
-        this.props.history.push('/map')
-      })
+    this.props.handleSignupSubmit(this.state, this.props.history)
   }
 
   handleOnClick = () => {

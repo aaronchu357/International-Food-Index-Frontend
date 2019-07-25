@@ -40,9 +40,7 @@ export default class FirstContainer extends Component {
       .then(resp => resp.json())
       .then(parsedResponse => {
         if (parsedResponse.token) {
-          console.log(parsedResponse)
           localStorage.setItem('token', parsedResponse.token)
-          debugger
           this.setState({ user: parsedResponse.user })
           history.push('/map')
         } else {
@@ -51,11 +49,32 @@ export default class FirstContainer extends Component {
       })
   }
 
+  handleSignupSubmit = (userData, history) => {
+    fetch('http://localhost:3000/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    })
+      .then(res => res.json())
+      .then(parsedResponse => {
+        if (parsedResponse.token) {
+          localStorage.setItem('token', parsedResponse.token)
+          this.setState({ user: parsedResponse.user })
+          history.push('/map')
+        } else {
+          alert('Username already taken')
+        }
+      })
+  }
+
   render() {
     return (
       <Switch>
         <Route exact path='/' component={Homepage} />
-        <Route path='/signup' component={SignupPage} />
+        <Route path='/signup' render={(routerProps) => <SignupPage {...routerProps} handleSignupSubmit={this.handleSignupSubmit} />} />
         <Route path='/login' render={(routerProps) => <LoginPage {...routerProps} handleSubmit={this.handleSubmit} />} />
         <Route path='/map' render={(routerProps) => <Map {...routerProps} userInfo={this.state.user} />} />
       </Switch>

@@ -73,8 +73,8 @@ class MapInfoWindow extends Component {
           <div style={{
             background: 'white',
             padding: 15,
-            maxWidth: 300,
-            maxHeight: 200,
+            maxWidth: 400,
+            maxHeight: 250,
           }}>
             <h1>{this.props.locationInfo.attributes.name}</h1>
             <NationalDishContainer dishes={this.state.dishes} handhandleNationalDishOnClick={this.handhandleNationalDishOnClick} setModalShow={this.setModalShow} />

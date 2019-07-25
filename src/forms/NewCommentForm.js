@@ -16,12 +16,10 @@ export default class NewCommentForm extends Component {
 
   handleContent = (e) => {
     this.setState({ content: e.target.value })
-    console.log(this.state.content)
   }
 
   handleChange = (e) => {
     this.setState({ rating: e.target.value })
-    console.log(this.state.rating)
   }
 
   render() {

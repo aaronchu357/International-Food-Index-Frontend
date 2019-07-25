@@ -46,7 +46,6 @@ export default class CommentsContainer extends Component {
         <Comment commentId={commentId} userInfo={this.props.userInfo}/>
       )
     })
-
     return (
       <div>
         {generateComments}
