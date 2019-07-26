@@ -21,21 +21,19 @@ export default class FirstContainer extends Component {
       })
         .then(resp => resp.json())
         .then(userInfo => {
-          this.setState({
-            user: userInfo.data
-          })
+          this.setState({ user: userInfo.data.attributes })
         })
     }
   }
 
-  handleSubmit = (userData, history) => {
-    fetch('http://localhost:3000/login', {
+  handleSubmit = (userData, history, endpoint, alertMessage) => {
+    fetch(`http://localhost:3000/${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify({ userData })
     })
       .then(resp => resp.json())
       .then(parsedResponse => {
@@ -44,28 +42,7 @@ export default class FirstContainer extends Component {
           this.setState({ user: parsedResponse.user })
           history.push('/map')
         } else {
-          alert('Wrong Password')
-        }
-      })
-  }
-
-  handleSignupSubmit = (userData, history) => {
-    fetch('http://localhost:3000/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    })
-      .then(res => res.json())
-      .then(parsedResponse => {
-        if (parsedResponse.token) {
-          localStorage.setItem('token', parsedResponse.token)
-          this.setState({ user: parsedResponse.user })
-          history.push('/map')
-        } else {
-          alert('Username already taken')
+          alert(alertMessage)
         }
       })
   }
@@ -74,7 +51,7 @@ export default class FirstContainer extends Component {
     return (
       <Switch>
         <Route exact path='/' component={Homepage} />
-        <Route path='/signup' render={(routerProps) => <SignupPage {...routerProps} handleSignupSubmit={this.handleSignupSubmit} />} />
+        <Route path='/signup' render={(routerProps) => <SignupPage {...routerProps} handleSubmit={this.handleSubmit} />} />
         <Route path='/login' render={(routerProps) => <LoginPage {...routerProps} handleSubmit={this.handleSubmit} />} />
         <Route path='/map' render={(routerProps) => <Map {...routerProps} userInfo={this.state.user} />} />
       </Switch>

@@ -1,22 +1,27 @@
 import React, { Component } from 'react'
 import NewCommentForm from '../forms/NewCommentForm'
 import Comment from '../components/Comment'
+import { NavLink } from 'react-router-dom'
 
 export default class CommentsContainer extends Component {
 
   state = {
-    comments: []
+    comments: [],
+    alreadyCommented: false
   }
 
   componentDidMount() {
+    console.log('comment container mount')
     fetch(`http://localhost:3000/national_dishes/${this.props.nationalDishSelected.id}`)
       .then(resp => resp.json())
       .then(nationalDish => {
         let allComments = []
-        nationalDish.data.relationships.comments.data.map(comment => {
-          allComments.push(comment.id)
-        })
-        this.setState({ comments: allComments })
+        nationalDish.data.attributes.comments.map(comment => allComments.push(comment))
+        if (localStorage.token) {
+          !!allComments.find(comment => comment.user_id === this.props.userInfo.id) ? this.setState({ comments: allComments, alreadyCommented: true }) : this.setState({ comments: allComments })
+        } else {
+          this.setState({ comments: allComments, alreadyCommented: true })
+        }
       })
   }
 
@@ -36,20 +41,23 @@ export default class CommentsContainer extends Component {
     })
       .then(resp => resp.json())
       .then(commentInfo => {
-        this.setState({ comments: [...this.state.comments, commentInfo.data.id] })
+        this.setState(prevState => {
+          return { comments: [...prevState.comments, commentInfo.data], alreadyCommented: true }
+        })
       })
   }
 
   render() {
-    const generateComments = this.state.comments.map(commentId => {
+    const generateComments = this.state.comments.map(comment => {
       return (
-        <Comment commentId={commentId} userInfo={this.props.userInfo}/>
+        <Comment commentId={comment.id} userInfo={this.props.userInfo} />
       )
     })
     return (
       <div>
         {generateComments}
-        <NewCommentForm handleCommentFormSubmit={this.handleCommentFormSubmit}/>
+        {this.state.alreadyCommented ? null : <NewCommentForm handleCommentFormSubmit={this.handleCommentFormSubmit} />}
+        {localStorage.token ? null : <h4><NavLink to='/login'>Login</NavLink> or <NavLink to='/signup'>Signup</NavLink> to comment on this dish.</h4>}
       </div >
     )
   }

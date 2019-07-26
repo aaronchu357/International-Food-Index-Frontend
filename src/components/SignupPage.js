@@ -7,24 +7,21 @@ export default class SignupPage extends Component {
     username: '',
     password: ''
   }
-  
+
   handleOnChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.handleSignupSubmit(this.state, this.props.history)
+    this.props.handleSubmit(this.state, this.props.history, 'signup', 'Username already taken')
   }
 
-  handleOnClick = () => {
-    this.props.history.push('/')
-  }
-  
   render() {
     return (
       <div className='signup'>
-        <Button onClick={this.handleOnClick}>Go Back</Button>
+        <Button onClick={() => this.props.history.push('/')}>Homepage</Button>
+        <Button onClick={() => this.props.history.push('/map')}>To Map</Button>
         <form onSubmit={this.handleSubmit}>
           <input type='text' name='username' placeholder='username' onChange={this.handleOnChange} />
           <br />

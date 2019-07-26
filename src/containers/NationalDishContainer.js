@@ -3,6 +3,19 @@ import NationalDish from '../components/NationalDish'
 
 class NationalDishContainer extends React.Component {
 
+  // state = {
+  //   dishes: []
+  // }
+
+  // componentDidMount() {
+  //   this.setState({dishes: []})
+  // }
+
+  // componentDidUpdate(prevProps) {
+  //   if(this.props.dishes !== prevProps.dishes){
+  //     this.setState({dishes: this.props.dishes})
+  //   }
+  // }
 
   render() {
     const generateDishes = this.props.dishes.map(dish => {

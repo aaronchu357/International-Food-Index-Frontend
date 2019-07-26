@@ -12,19 +12,16 @@ export default class LoginPage extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleOnClick = () => {
-    this.props.history.push('/')
-  }
-
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.handleSubmit(this.state, this.props.history)
+    this.props.handleSubmit(this.state, this.props.history, 'login', 'Wrong Password')
   }
 
   render() {
     return (
       <div className='login'>
-        <Button onClick={this.handleOnClick}>Go Back</Button>
+        <Button onClick={() => this.props.history.push('/')}>Homepage</Button>
+        <Button onClick={() => this.props.history.push('/map')}>To Map</Button>
         <form onSubmit={this.handleSubmit}>
           <input type='text' name='username' placeholder='username' onChange={this.handleLoginInputOnChange} />
           <br />

@@ -1,70 +1,13 @@
 import React, { Fragment } from 'react'
 import { Marker } from '@react-google-maps/api'
-// import MapInfoWindow from './MapInfoWindow'
 
-const MapMarker = (props) => {
-  // const [currentInfoWindowlocation, setInfoWindowlocation] = useState({})
+const MapMarker = props => {
 
-  // const changeCurrentInfoWindow = useCallback(
-  //   (locationData) => {
-  //     setInfoWindowlocation(locationData)
-  //   }
-  // )
-
-  // return (
-  //   <>
-  //     <Marker id={props.location.name}
-  //       onLoad={marker => {
-  //         console.log('marker: ', marker)
-  //         console.log(props.location.name)
-  //       }}
-  //       position={{
-  //         lat: parseFloat(props.location.latitude),
-  //         lng: parseFloat(props.location.longitude)
-  //       }}
-  //       onClick={() => changeCurrentInfoWindow(props.location)}
-  //     />
-  //   </>
-  // ) 
-  
-  // const generateNationalDishes = () => {
-  //   debugger
-  //   nationalDishesIds.map(nationalDishId => {
-  //     return (
-  //       fetch(`http://localhost:3000/national_dishes/${nationalDishId}`)
-  //         .then(resp => resp.json())
-  //         .then(nationalDish => {
-  //           return (
-  //             <li>
-  //               {nationalDish.data.attributes.name}
-  //             </li>
-  //           )
-  //         })
-  //     )
-  //   })
-  // }
-
-
-  //---------------------------WORKS--------------------------------
-  // const [isShown, setIsShown] = useState(false)
-  // const [nationalDishesIds, setNationalDishesIds] = useState([])
-
-  // const changeIsShown = useCallback(
-  //   () => {
-  //     setIsShown(!isShown)
-  //   },
-  //   [isShown]
-  // )
-  //-----------------------------------------------------------------
-
-  //-------------------------------WORKS------------------------------
   // useEffect(() => {
   //   let dishesList = props.location.relationships.national_dishes.data.map(dish => dish.id)
   //   return setNationalDishesIds([...dishesList])
   // },[])
-  //------------------------------------------------------------------
 
-  //------------------------------WORKS----------------------------
   // return (
   //   <div>
   //     <Marker id={props.location.attributes.name}
@@ -92,7 +35,7 @@ const MapMarker = (props) => {
   //     }
   //   </div>
   // )
-  //-------------------------------------------------------------------------
+
   // withStateHandlers(() => ({
   //   isOpen: false,
   //   infoIndex: null
@@ -116,9 +59,8 @@ const MapMarker = (props) => {
     // setOpenCondition(!isOpen)
   }
 
-
   return (
-    <div>
+    <Fragment>
       <Marker id={props.location.id}
         onLoad={marker => {
           console.log(props.location.attributes.name)
@@ -130,7 +72,7 @@ const MapMarker = (props) => {
         }}
         onClick={handleMarkerOnClick}
       />
-    </div>
+    </Fragment>
   )
 }
 

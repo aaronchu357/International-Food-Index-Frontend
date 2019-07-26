@@ -3,9 +3,11 @@ import MapMarker from '../components/MapMarker'
 import MapInfoWindow from '../components/MapInfoWindow';
 
 class MarkersContainer extends Component {
+  
   state = {
     locationCoordinates: [],
-    locationInfo: null
+    locationInfo: null,
+    locationDishes: []
   }
 
   componentDidMount() {
@@ -13,25 +15,22 @@ class MarkersContainer extends Component {
       .then(resp => resp.json())
       .then(locations => {
         locations.data.map(location => {
-          this.setState({ locationCoordinates: [...this.state.locationCoordinates, location] })
+          return this.setState({ locationCoordinates: [...this.state.locationCoordinates, location] })
         })
       })
   }
   
   handleMarkerOnClick = (locationInfo) => {
-    // let dishesData = locationInfo.relationships.national_dishes.data.map(dish => {
-    //   debugger
-    //     fetch(`http://localhost:3000/national_dishes/${dish.id}`)
-    //       // Promise is not parsing
-    //       .then(resp => resp.json())
-    //       .then(dishData => {
-    //         debugger
-    //         return dishData.data
-    //       })
-    // })
-    this.setState({
-      locationInfo: locationInfo
-    })
+    fetch(`http://localhost:3000/locations/${locationInfo.id}`)
+      .then(resp => resp.json())
+      .then(locationData => {
+        let dishes = []
+        locationData.data.attributes.national_dishes.map(dish => dishes.push(dish))
+        this.setState({
+          locationInfo: locationInfo,
+          locationDishes: dishes
+        })
+      })
   }
 
   handleInfoWindowCloseClick = () => {
@@ -41,8 +40,9 @@ class MarkersContainer extends Component {
   }
 
   render() {
+    
     const generateMarkers = this.state.locationCoordinates.map(location => <MapMarker location={location} handleMarkerOnClick={this.handleMarkerOnClick} />)
-    const generateInfoWindow = <MapInfoWindow locationInfo={this.state.locationInfo} handleInfoWindowCloseClick={this.handleInfoWindowCloseClick} userInfo={this.props.userInfo}/>
+    const generateInfoWindow = <MapInfoWindow locationDishes={this.state.locationDishes} locationInfo={this.state.locationInfo} handleInfoWindowCloseClick={this.handleInfoWindowCloseClick} userInfo={this.props.userInfo}/>
     return (
       <div className='markers-container' >
         {generateMarkers}
