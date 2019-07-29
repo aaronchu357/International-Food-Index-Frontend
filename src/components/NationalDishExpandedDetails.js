@@ -25,7 +25,7 @@ const NationalDishExpandedDetails = props => {
             <Tab eventKey="recipe" title="Recipe">
               <MDBModalHeader toggle={props.onHide}>{props.nationalDishSelected.name} Recipes</MDBModalHeader>
               <MDBModalBody>
-                <RecipeIframe source={`https://www.bing.com/search?q=${props.nationalDishSelected.name.replace(/\s+/g, '%20').toLowerCase()}%20recipe`} />
+                <RecipeIframe source={`https://www.bing.com/images/search?q=${props.nationalDishSelected.name.replace(/\s+/g, '%20').toLowerCase()}%20recipe`} />
               </MDBModalBody>
               <MDBModalFooter>
                 <MDBBtn color="primary" onClick={props.onHide}>Close</MDBBtn>

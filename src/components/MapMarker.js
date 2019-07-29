@@ -61,7 +61,7 @@ const MapMarker = props => {
 
   return (
     <Fragment>
-      <Marker id={props.location.id}
+        <Marker id={props.location.id}
         onLoad={marker => {
           console.log(props.location.attributes.name)
           console.log(marker)
@@ -71,7 +71,7 @@ const MapMarker = props => {
           lng: parseFloat(props.location.attributes.longitude)
         }}
         onClick={handleMarkerOnClick}
-      />
+        />
     </Fragment>
   )
 }

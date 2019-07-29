@@ -5,6 +5,7 @@ import Homepage from '../components/Homepage'
 import LoginPage from '../components/LoginPage'
 import SignupPage from '../components/SignupPage'
 import Map from '../components/Map'
+import ProfilePage from '../components/ProfilePage'
 
 export default class FirstContainer extends Component {
 
@@ -54,6 +55,7 @@ export default class FirstContainer extends Component {
         <Route path='/signup' render={(routerProps) => <SignupPage {...routerProps} handleSubmit={this.handleSubmit} />} />
         <Route path='/login' render={(routerProps) => <LoginPage {...routerProps} handleSubmit={this.handleSubmit} />} />
         <Route path='/map' render={(routerProps) => <Map {...routerProps} userInfo={this.state.user} />} />
+        <Route path='/profile' render={(routerProps) => <ProfilePage {...routerProps} userInfo={this.state.user} />} />
       </Switch>
     )
   }
