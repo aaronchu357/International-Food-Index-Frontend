@@ -1,16 +1,21 @@
 import React, { useState, Fragment } from 'react'
 import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
-  MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBBtn, MDBTooltip
+  MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBBtn, MDBTooltip, MDBFormInline
 } from 'mdbreact';
 import { ReactComponent as FoodLogo } from './restaurant.svg'
 
 const TopNavBar = props => {
 
   const [isOpen, setIsOpen] = useState(false)
+  const [searchInput, setSeachInput] = useState('')
+  const [searchIconClicked, setSearchIconClicked] = useState(false)
 
   const toggleCollapse = () => { setIsOpen(!isOpen) }
-
+  const handleSearchInput = e => {
+    e.preventDefault()
+    setSeachInput(e.target.value)
+  }
   const logOutButtonOnClick = () => { localStorage.clear() }
 
   return (
@@ -21,6 +26,9 @@ const TopNavBar = props => {
         </MDBNavbarBrand>
 
         <MDBNavbarNav left>
+          <MDBNavItem>
+            <MDBBtn size="sm" color="primary" onClick={() => props.history.push('/')} disabled={window.location.href !== "http://localhost:3001/" ? false : true}>International Food Index</MDBBtn>
+          </MDBNavItem>
           <MDBTooltip
             placement="right"
           >
@@ -32,71 +40,108 @@ const TopNavBar = props => {
         <MDBNavbarToggler onClick={toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
 
-
-          <MDBNavbarNav>
-            <MDBNavItem>
-              <MDBNavbarBrand>
-                <Fragment>International Food Index</Fragment>
-              </MDBNavbarBrand>
-            </MDBNavItem>
-          </MDBNavbarNav>
-
-          <MDBNavbarNav right>
-            <MDBNavItem>
-              <MDBNavLink className="waves-effect waves-light" to="/about" >
-                <MDBIcon fab icon="fas fa-react" />
-              </MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink className="waves-effect waves-light" to="/about">
-                <MDBIcon fab icon="twitter" />
-              </MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink className="waves-effect waves-light" to="/about">
-                <MDBIcon fab icon="google" />
-              </MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink className="waves-effect waves-light" to="/about">
-                <MDBIcon fab icon="fab fa-facebook" />
-              </MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink className="waves-effect waves-light" to="/about">
-                <MDBIcon fab icon="fab fa-github" />
-              </MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink className="waves-effect waves-light" to="/about">
-                <MDBIcon fab icon="fas fa-linkedin" />
-              </MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink className="waves-effect waves-light" to="/about">
-                <MDBIcon fab icon="fas fa-slack" />
-              </MDBNavLink>
-              
-            </MDBNavItem>
-            {
-              localStorage.token ?
+          {
+            window.location.href !== "http://localhost:3001/map" ?
+              <MDBNavbarNav right>
                 <MDBNavItem>
-                  <MDBDropdown>
-                    <MDBDropdownToggle nav caret >
-                      <MDBIcon icon="user" />
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu className="dropdown-default" right>
-                      <MDBDropdownItem href="/profile">Profile</MDBDropdownItem>
-                      <MDBDropdownItem href="/" onClick={logOutButtonOnClick}>Log Out</MDBDropdownItem>
-                    </MDBDropdownMenu>
-                  </MDBDropdown>
+                  <MDBNavLink className="waves-effect waves-light" to="/about" >
+                    <MDBIcon fab icon="fas fa-react" />
+                  </MDBNavLink>
                 </MDBNavItem>
-                :
-                <MDBNavItem active>
-                  <MDBNavLink to={props.navPath}>{props.buttonName}</MDBNavLink>
+                <MDBNavItem>
+                  <MDBNavLink className="waves-effect waves-light" to="/about">
+                    <MDBIcon fab icon="twitter" />
+                  </MDBNavLink>
                 </MDBNavItem>
-            }
-          </MDBNavbarNav>
+                <MDBNavItem>
+                  <MDBNavLink className="waves-effect waves-light" to="/about">
+                    <MDBIcon fab icon="google" />
+                  </MDBNavLink>
+                </MDBNavItem>
+                <MDBNavItem>
+                  <MDBNavLink className="waves-effect waves-light" to="/about">
+                    <MDBIcon fab icon="fab fa-facebook" />
+                  </MDBNavLink>
+                </MDBNavItem>
+                <MDBNavItem>
+                  <MDBNavLink className="waves-effect waves-light" to="/about">
+                    <MDBIcon fab icon="fab fa-github" />
+                  </MDBNavLink>
+                </MDBNavItem>
+                <MDBNavItem>
+                  <MDBNavLink className="waves-effect waves-light" to="/about">
+                    <MDBIcon fab icon="fas fa-linkedin" />
+                  </MDBNavLink>
+                </MDBNavItem>
+                <MDBNavItem>
+                  <MDBNavLink className="waves-effect waves-light" to="/about">
+                    <MDBIcon fab icon="fas fa-slack" />
+                  </MDBNavLink>
+                </MDBNavItem>
+
+                {
+                  localStorage.token ?
+                    <MDBNavItem>
+                      <MDBDropdown>
+                        <MDBDropdownToggle nav caret >
+                          <MDBIcon icon="user" />
+                        </MDBDropdownToggle>
+                        <MDBDropdownMenu className="dropdown-default" right>
+                          <MDBDropdownItem href="/profile">Profile</MDBDropdownItem>
+                          <MDBDropdownItem href="/" onClick={logOutButtonOnClick}>Log Out</MDBDropdownItem>
+                        </MDBDropdownMenu>
+                      </MDBDropdown>
+                    </MDBNavItem>
+                    :
+                    <MDBNavItem active>
+                      <MDBNavLink to={props.navPath}>{props.buttonName}</MDBNavLink>
+                    </MDBNavItem>
+                }
+              </MDBNavbarNav>
+              :
+              <MDBNavbarNav right>
+                {
+                  searchIconClicked ?
+                    <MDBNavItem>
+                      <MDBFormInline waves onSubmit={(e) => props.handleSearchFormOnSubmit(e, searchInput)}>
+                        <div className="md-form my-0">
+                          <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" value={searchInput} onChange={handleSearchInput} />
+                        </div>
+                      </MDBFormInline>
+                    </MDBNavItem>
+                    :
+                    null
+                }
+
+                <MDBNavItem onClick={() => setSearchIconClicked(!searchIconClicked)}>
+                  <MDBNavLink className="waves-effect waves-light">
+                
+                      <i className="fas fa-search-location"></i>
+
+                  </MDBNavLink>
+                </MDBNavItem>
+                <div>Search</div>
+
+                {
+                  localStorage.token ?
+                    <MDBNavItem>
+                      <MDBDropdown>
+                        <MDBDropdownToggle nav caret >
+                          <MDBIcon icon="user" />
+                        </MDBDropdownToggle>
+                        <MDBDropdownMenu className="dropdown-default" right>
+                          <MDBDropdownItem href="/profile">Profile</MDBDropdownItem>
+                          <MDBDropdownItem href="/" onClick={logOutButtonOnClick}>Log Out</MDBDropdownItem>
+                        </MDBDropdownMenu>
+                      </MDBDropdown>
+                    </MDBNavItem>
+                    :
+                    <MDBNavItem active>
+                      <MDBNavLink to={props.navPath}>{props.buttonName}</MDBNavLink>
+                    </MDBNavItem>
+                }
+              </MDBNavbarNav>
+          }
         </MDBCollapse>
       </MDBNavbar>
     </div>

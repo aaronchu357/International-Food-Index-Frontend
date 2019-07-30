@@ -29,6 +29,7 @@ class ProfilePage extends Component {
     })
     return (
       <div className='profile-page'>
+        WORK IN PROGRESS: 
         <h4>List of Comments:</h4>
         {generateUserComments}
       </div>

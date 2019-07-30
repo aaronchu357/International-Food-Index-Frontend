@@ -45,7 +45,7 @@ export default class LoginPage extends Component {
                   />
                 </div>
                 <div className="text-center">
-                  <MDBBtn color="primary" onClick={this.handleSubmit}>Login <i class="fas fa-sign-in-alt"></i></MDBBtn>
+                  <MDBBtn color="primary" onClick={this.handleSubmit}>Login <i className="fas fa-sign-in-alt"></i></MDBBtn>
                 </div>
               </form>
             </MDBCol>

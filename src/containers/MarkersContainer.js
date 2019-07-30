@@ -3,7 +3,7 @@ import MapMarker from '../components/MapMarker'
 import MapInfoWindow from '../components/MapInfoWindow';
 
 class MarkersContainer extends Component {
-  
+
   state = {
     locationCoordinates: [],
     locationInfo: null,
@@ -19,7 +19,13 @@ class MarkersContainer extends Component {
         })
       })
   }
-  
+
+  componentDidUpdate(prevState) {
+    if (this.state.locationCoordinates !== prevState.locationCoordinates) {
+      this.props.addLocationCoordinates(this.state.locationCoordinates)
+    }
+  }
+
   handleMarkerOnClick = (locationInfo) => {
     fetch(`http://localhost:3000/locations/${locationInfo.id}`)
       .then(resp => resp.json())
@@ -40,9 +46,9 @@ class MarkersContainer extends Component {
   }
 
   render() {
-    
+
     const generateMarkers = this.state.locationCoordinates.map(location => <MapMarker location={location} handleMarkerOnClick={this.handleMarkerOnClick} />)
-    const generateInfoWindow = <MapInfoWindow locationDishes={this.state.locationDishes} locationInfo={this.state.locationInfo} handleInfoWindowCloseClick={this.handleInfoWindowCloseClick} userInfo={this.props.userInfo}/>
+    const generateInfoWindow = <MapInfoWindow locationDishes={this.state.locationDishes} locationInfo={this.state.locationInfo} handleInfoWindowCloseClick={this.handleInfoWindowCloseClick} userInfo={this.props.userInfo} />
     return (
       <div className='markers-container' >
         {generateMarkers}

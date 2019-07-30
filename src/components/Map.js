@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GoogleMap, LoadScript } from '@react-google-maps/api'
 import MarkersContainer from '../containers/MarkersContainer';
-import styles from './Map.json'
 import TopNavBar from './TopNavBar'
+import style from './Map.json'
 
 const Map = props => {
+
+  const [locationCoordinates, setLocationCoordinates] = useState([])
+  const [initialLocationCoordinates, setInitialLocationCoordinates] = useState({ lat: 28.435665, lng: 14.648057 })
+  const [initialZoomLevel, setInitialZoomLevel] = useState(3)
+  const [searchedLocationCoordinates, setSearchedLocationCoordinates] = useState('')
+  const [searchedZoomLevel, setSearchedZoomLevel] = useState(0)
+
+  const handleSearchFormOnSubmit = (e, searchInput) => {
+    e.preventDefault()
+    let foundLocation = locationCoordinates.find(location => location.attributes.name.toLowerCase().includes(searchInput.toLowerCase()))
+    setSearchedLocationCoordinates({ lat: parseFloat(foundLocation.attributes.latitude), lng: parseFloat(foundLocation.attributes.longitude) })
+    setSearchedZoomLevel(6)
+  }
+
+  const addLocationCoordinates = (locationsInfo) => { setLocationCoordinates(locationsInfo) }
+
   return (
     <div>
-      <TopNavBar {...props} buttonName={"Login"} navPath={"/login"}/>
+      <TopNavBar {...props} buttonName={"Login"} navPath={"/login"} handleSearchFormOnSubmit={handleSearchFormOnSubmit} />
 
       <LoadScript
         id="script-loader"
@@ -15,18 +31,16 @@ const Map = props => {
       >
         <GoogleMap
           id='world-map'
+          options={{ styles: style }}
           clickableIcons={true}
           mapContainerStyle={{
-            height: "92vh",
+            height: "91.65vh",
             width: "100vw",
           }}
-          zoom={3}
-          center={{
-            lat: 28.435665,
-            lng: 14.648057
-          }}
+          zoom={searchedZoomLevel ? searchedZoomLevel : initialZoomLevel}
+          center={searchedLocationCoordinates ? searchedLocationCoordinates : initialLocationCoordinates}
         >
-          <MarkersContainer userInfo={props.userInfo} />
+          <MarkersContainer userInfo={props.userInfo} addLocationCoordinates={addLocationCoordinates} />
         </GoogleMap>
       </LoadScript>
     </div>
