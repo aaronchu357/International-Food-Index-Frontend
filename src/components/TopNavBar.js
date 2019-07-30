@@ -35,8 +35,8 @@ const TopNavBar = props => {
             <MDBBtn size="sm" color="primary" onClick={() => props.history.push('/map')}>Browse Map</MDBBtn>
             <div>Sup</div>
           </MDBTooltip>
-
         </MDBNavbarNav>
+
         <MDBNavbarToggler onClick={toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
 
@@ -78,7 +78,6 @@ const TopNavBar = props => {
                     <MDBIcon fab icon="fas fa-slack" />
                   </MDBNavLink>
                 </MDBNavItem>
-
                 {
                   localStorage.token ?
                     <MDBNavItem>
@@ -115,13 +114,9 @@ const TopNavBar = props => {
 
                 <MDBNavItem onClick={() => setSearchIconClicked(!searchIconClicked)}>
                   <MDBNavLink className="waves-effect waves-light">
-                
-                      <i className="fas fa-search-location"></i>
-
+                    <i className="fas fa-search-location"></i>
                   </MDBNavLink>
                 </MDBNavItem>
-                <div>Search</div>
-
                 {
                   localStorage.token ?
                     <MDBNavItem>
@@ -142,9 +137,10 @@ const TopNavBar = props => {
                 }
               </MDBNavbarNav>
           }
+
         </MDBCollapse>
       </MDBNavbar>
-    </div>
+    </div >
   )
 }
 
