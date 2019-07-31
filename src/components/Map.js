@@ -11,6 +11,7 @@ const Map = props => {
   const [initialZoomLevel, setInitialZoomLevel] = useState(3)
   const [searchedLocationCoordinates, setSearchedLocationCoordinates] = useState('')
   const [searchedZoomLevel, setSearchedZoomLevel] = useState(0)
+  const [toggleSwitchOn, setToggleSwitchOn] = useState(false)
 
   const handleSearchFormOnSubmit = (e, searchInput) => {
     e.preventDefault()
@@ -19,11 +20,13 @@ const Map = props => {
     setSearchedZoomLevel(6)
   }
 
+  const handleToggleSwitchClick = () => setToggleSwitchOn(!toggleSwitchOn)
+
   const addLocationCoordinates = (locationsInfo) => { setLocationCoordinates(locationsInfo) }
 
   return (
     <div>
-      <TopNavBar {...props} buttonName={"Login"} navPath={"/login"} handleSearchFormOnSubmit={handleSearchFormOnSubmit} />
+      <TopNavBar {...props} buttonName={"Login"} navPath={"/login"} handleSearchFormOnSubmit={handleSearchFormOnSubmit} handleToggleSwitchClick={handleToggleSwitchClick} toggleSwitchOn={toggleSwitchOn}/>
 
       <LoadScript
         id="script-loader"
@@ -31,10 +34,10 @@ const Map = props => {
       >
         <GoogleMap
           id='world-map'
-          options={{ styles: style }}
+          options={toggleSwitchOn ? { styles: null } : { styles: style }}
           clickableIcons={true}
           mapContainerStyle={{
-            height: "91.65vh",
+            height: "89.2vh",
             width: "100vw",
           }}
           zoom={searchedZoomLevel ? searchedZoomLevel : initialZoomLevel}

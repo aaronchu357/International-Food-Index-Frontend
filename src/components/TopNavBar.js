@@ -1,9 +1,10 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
   MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBBtn, MDBTooltip, MDBFormInline
 } from 'mdbreact';
 import { ReactComponent as FoodLogo } from './restaurant.svg'
+import ToggleSwitch from './ToggleSwitch'
 
 const TopNavBar = props => {
 
@@ -20,19 +21,20 @@ const TopNavBar = props => {
 
   return (
     <div className='homepage'>
-      <MDBNavbar color="unique-color-dark" dark expand="md" >
+      <MDBNavbar color="unique-color-dark" dark expand="md">
         <MDBNavbarBrand onClick={() => props.history.push('/')}>
           <FoodLogo width={50} height={50} />
         </MDBNavbarBrand>
 
         <MDBNavbarNav left>
           <MDBNavItem>
-            <MDBBtn size="sm" color="primary" onClick={() => props.history.push('/')} disabled={window.location.href !== "http://localhost:3001/" ? false : true}>International Food Index</MDBBtn>
+            <MDBBtn size="sm" color="primary" onClick={() => props.history.push('/')} disabled={window.location.href === "http://localhost:3001/" ? true : false}>International Food Index</MDBBtn>
           </MDBNavItem>
+
           <MDBTooltip
             placement="right"
           >
-            <MDBBtn size="sm" color="primary" onClick={() => props.history.push('/map')}>Browse Map</MDBBtn>
+            <MDBBtn size="sm" color="primary" onClick={() => props.history.push('/map')} disabled={window.location.href === "http://localhost:3001/map" ? true : false}>Browse Map</MDBBtn>
             <div>Sup</div>
           </MDBTooltip>
 
@@ -105,22 +107,24 @@ const TopNavBar = props => {
                     <MDBNavItem>
                       <MDBFormInline waves onSubmit={(e) => props.handleSearchFormOnSubmit(e, searchInput)}>
                         <div className="md-form my-0">
-                          <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" value={searchInput} onChange={handleSearchInput} />
+                          <input className="form-control mr-sm-2" type="text" placeholder="Search Country" aria-label="Search" value={searchInput} onChange={handleSearchInput} />
                         </div>
                       </MDBFormInline>
                     </MDBNavItem>
                     :
                     null
                 }
-
                 <MDBNavItem onClick={() => setSearchIconClicked(!searchIconClicked)}>
                   <MDBNavLink className="waves-effect waves-light">
-                
-                      <i className="fas fa-search-location"></i>
-
+                    <i className="fas fa-search-location"></i>
                   </MDBNavLink>
                 </MDBNavItem>
-                <div>Search</div>
+
+                <ToggleSwitch
+                  isOn={props.toggleSwitchOn}
+                  onColor="#06D6A0"
+                  handleToggle={props.handleToggleSwitchClick}
+                />
 
                 {
                   localStorage.token ?

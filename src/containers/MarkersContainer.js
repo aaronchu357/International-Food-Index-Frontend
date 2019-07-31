@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import MapMarker from '../components/MapMarker'
 import MapInfoWindow from '../components/MapInfoWindow';
 
+function importAll(r) {
+  return r.keys().map(r);
+}
+
+const images = importAll(require.context('./svg', false, /\.(png|jpe?g|svg)$/));
+
 class MarkersContainer extends Component {
 
   state = {
@@ -44,9 +50,22 @@ class MarkersContainer extends Component {
       locationInfo: null
     })
   }
+  
+  getMarkerIcon = () => {
+    let imageFileFinal = undefined
+    debugger
+    images.map(image => {
+      let imageFileInitial = image
+      let imageFileCountryName = image.split('.')[0].split('/').pop()
+      if (imageFileCountryName === this.state.locationCoordinates.attributes.name.toLowerCase().join("-")) {
+        debugger
+        imageFileFinal = imageFileInitial
+      }
+    })
+    return imageFileFinal
+  }
 
   render() {
-
     const generateMarkers = this.state.locationCoordinates.map(location => <MapMarker location={location} handleMarkerOnClick={this.handleMarkerOnClick} />)
     const generateInfoWindow = <MapInfoWindow locationDishes={this.state.locationDishes} locationInfo={this.state.locationInfo} handleInfoWindowCloseClick={this.handleInfoWindowCloseClick} userInfo={this.props.userInfo} />
     return (
