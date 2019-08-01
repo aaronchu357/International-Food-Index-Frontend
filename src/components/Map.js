@@ -37,7 +37,7 @@ const Map = props => {
           options={toggleSwitchOn ? { styles: null } : { styles: style }}
           clickableIcons={true}
           mapContainerStyle={{
-            height: "89.2vh",
+            height: "94vh",
             width: "100vw",
           }}
           zoom={searchedZoomLevel ? searchedZoomLevel : initialZoomLevel}

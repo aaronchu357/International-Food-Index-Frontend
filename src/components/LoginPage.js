@@ -6,7 +6,7 @@ export default class LoginPage extends Component {
 
   state = {
     username: '',
-    password: '',
+    password: ''
   }
 
   handleLoginInputOnChange = (e) => {
@@ -44,6 +44,7 @@ export default class LoginPage extends Component {
                         type="password"
                         className="password"
                         onChange={this.handleLoginInputOnChange}
+
                       />
                     </div>
                     <div className="text-center">
@@ -56,6 +57,7 @@ export default class LoginPage extends Component {
             </MDBContainer>
           </MDBMask>
         </MDBView>
+
 
       </div >
     )
