@@ -1,13 +1,14 @@
 import React from 'react'
 import TopNavBar from './TopNavBar'
-import HomepageFoodInfoIFrame from './HomepageFoodInfoIFrame'
+import CountdownTimer from './CountdownTimer'
+
+const deadlineDate = new Date('September 31, 2019 23:59:59').getTime()
 
 const ComingSoon = props => {
   return (
-    <div className='homepage'>
-      <TopNavBar {...props} buttonName={"Login"} navPath={"/login"}/>
-      {/* <HomepageFoodInfoIFrame source={"http://rhythm-of-food.net/"} /> */}
-      <footer><strong>Disclaimer: THIS LANDING PAGE IS NOT MY CREATION. From <a href='http://rhythm-of-food.net/' target="_blank" rel="noopener noreferrer">Rhythm of Food</a></strong></footer>
+    <div className='coming-soon-page'>
+      <TopNavBar {...props} buttonName={"Login"} navPath={"/login"} />
+      <CountdownTimer deadlineDate={deadlineDate}/>
     </div>
   )
 }

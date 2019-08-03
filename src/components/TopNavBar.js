@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
-  MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBBtn, MDBTooltip, MDBFormInline
+  MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBBtn, MDBTooltip, MDBFormInline, MDBNotification
 } from 'mdbreact';
 import { ReactComponent as FoodLogo } from './restaurant.svg'
 import ToggleSwitch from './ToggleSwitch'
@@ -45,7 +45,7 @@ const TopNavBar = props => {
           {
             window.location.href !== "http://localhost:3001/map" ?
               <MDBNavbarNav right>
-                <MDBNavItem>
+                {/* <MDBNavItem>
                   <MDBNavLink className="waves-effect waves-light" to="/about" >
                     <MDBIcon fab icon="fas fa-react" />
                   </MDBNavLink>
@@ -79,6 +79,11 @@ const TopNavBar = props => {
                   <MDBNavLink className="waves-effect waves-light" to="/about">
                     <MDBIcon fab icon="fas fa-slack" />
                   </MDBNavLink>
+                </MDBNavItem> */}
+                <MDBNavItem>
+                  <MDBNavLink className="waves-effect waves-light" to="/about">
+                    <MDBIcon icon="fas fa-share-alt" />
+                  </MDBNavLink>
                 </MDBNavItem>
 
                 {
@@ -102,6 +107,7 @@ const TopNavBar = props => {
               </MDBNavbarNav>
               :
               <MDBNavbarNav right>
+                
                 {
                   searchIconClicked ?
                     <MDBNavItem>
@@ -125,6 +131,12 @@ const TopNavBar = props => {
                   onColor="#06D6A0"
                   handleToggle={props.handleToggleSwitchClick}
                 />
+
+                <MDBNavItem>
+                  <MDBNavLink className="waves-effect waves-light" to="/about">
+                    <MDBIcon icon="fas fa-share-alt" />
+                  </MDBNavLink>
+                </MDBNavItem>
 
                 {
                   localStorage.token ?

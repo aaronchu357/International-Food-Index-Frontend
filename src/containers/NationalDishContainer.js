@@ -25,7 +25,7 @@ class NationalDishContainer extends React.Component {
     })
     return (
       <div className={'national-dishes-container'} >
-        {generateDishes}
+        {this.props.dishes.length === 0 ? <img src={"https://upload.wikimedia.org/wikipedia/commons/f/f9/500px-Xmas_tree_animated.gif"} alt='Sorry, Not Found' width={100} height={100} /> : generateDishes}
       </div>
     )
   }

@@ -23,6 +23,7 @@ class ProfilePage extends Component {
   handleButtonClick = (e, commentId) => {
     if (e.target.name === 'edit') {
       console.log("edit")
+      alert("Working on it!!!")
     } else if (e.target.name === 'delete') {
       fetch(`http://localhost:3000/comments/${commentId}`, {
         method: 'DELETE',

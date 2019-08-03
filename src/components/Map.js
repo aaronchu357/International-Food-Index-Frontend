@@ -3,6 +3,8 @@ import { GoogleMap, LoadScript } from '@react-google-maps/api'
 import MarkersContainer from '../containers/MarkersContainer';
 import TopNavBar from './TopNavBar'
 import style from './Map.json'
+import { MDBNotification } from 'mdbreact'
+import './Map.css'
 
 const Map = props => {
 
@@ -25,19 +27,32 @@ const Map = props => {
   const addLocationCoordinates = (locationsInfo) => { setLocationCoordinates(locationsInfo) }
 
   return (
-    <div>
-      <TopNavBar {...props} buttonName={"Login"} navPath={"/login"} handleSearchFormOnSubmit={handleSearchFormOnSubmit} handleToggleSwitchClick={handleToggleSwitchClick} toggleSwitchOn={toggleSwitchOn}/>
-
+    <div className="map-component">
+      <TopNavBar {...props} buttonName={"Login"} navPath={"/login"} handleSearchFormOnSubmit={handleSearchFormOnSubmit} handleToggleSwitchClick={handleToggleSwitchClick} toggleSwitchOn={toggleSwitchOn} />
       <LoadScript
         id="script-loader"
         googleMapsApiKey="AIzaSyCDqYru3D32INEjCkIOPB48OqjEWksoAXI"
       >
+
+        <MDBNotification
+          autohide={5000}
+          bodyClassName="p-5 font-weight-bold white-text"
+          className="stylish-color-dark"
+          closeClassName="blue-grey-text"
+          fade
+          icon="bell"
+          iconClassName="blue-grey-text"
+          message="Loading Map and Markers... Wait for it"
+          show
+          text="Just Now"
+          titleClassName="elegant-color-dark white-text"
+        />
         <GoogleMap
           id='world-map'
           options={toggleSwitchOn ? { styles: null } : { styles: style }}
           clickableIcons={true}
           mapContainerStyle={{
-            height: "94vh",
+            height: "91.5vh",
             width: "100vw",
           }}
           zoom={searchedZoomLevel ? searchedZoomLevel : initialZoomLevel}

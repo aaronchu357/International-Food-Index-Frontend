@@ -74,6 +74,7 @@ const MapMarker = props => {
         }}
         onClick={handleMarkerOnClick}
         />
+        
     </Fragment>
   )
 }
