@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Comment extends Component {
 
   state = {
-    comment: {}
+    comment: ''
   }
 
   componentDidMount() {
@@ -17,7 +17,7 @@ export default class Comment extends Component {
   render() {
     return (
       <div style={{ border: '8px solid yellowgreen', padding: '2%' }}>
-        <div>{this.props.userInfo.username}</div>
+        <div>{this.state.comment ? this.state.comment.user.username : null}</div>
         <div>Rating: {this.state.comment.rating}</div>
         <div>{this.state.comment.content}</div>
       </div>

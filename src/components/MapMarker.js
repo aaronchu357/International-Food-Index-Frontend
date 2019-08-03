@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Marker } from '@react-google-maps/api'
 
 const MapMarker = props => {
-
   // useEffect(() => {
   //   let dishesList = props.location.relationships.national_dishes.data.map(dish => dish.id)
   //   return setNationalDishesIds([...dishesList])
@@ -54,6 +53,8 @@ const MapMarker = props => {
 
   // const [isOpen, setOpenCondition] = useState(false)
 
+  const [markerHex, setMarkerHex] = useState(Math.floor(Math.random()*16777215).toString(16))
+
   const handleMarkerOnClick = () => {
     props.handleMarkerOnClick(props.location)
     // setOpenCondition(!isOpen)
@@ -66,12 +67,14 @@ const MapMarker = props => {
           console.log(props.location.attributes.name)
           console.log(marker)
         }}
+        icon={markerHex.length === 6 ? `https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=•|${markerHex}` : `https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=•|FFFFFF` }
         position={{
           lat: parseFloat(props.location.attributes.latitude),
           lng: parseFloat(props.location.attributes.longitude)
         }}
         onClick={handleMarkerOnClick}
         />
+        
     </Fragment>
   )
 }

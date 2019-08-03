@@ -48,11 +48,7 @@ export default class CommentsContainer extends Component {
   }
 
   render() {
-    const generateComments = this.state.comments.map(comment => {
-      return (
-        <Comment commentId={comment.id} userInfo={this.props.userInfo} />
-      )
-    })
+    const generateComments = this.state.comments.map(comment => <Comment commentId={comment.id} userInfo={this.props.userInfo} />)
     return (
       <div>
         {generateComments}

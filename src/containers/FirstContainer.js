@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Homepage from '../components/Homepage'
 import LoginPage from '../components/LoginPage'
 import SignupPage from '../components/SignupPage'
 import Map from '../components/Map'
 import ProfilePage from '../components/ProfilePage'
+import ComingSoon from '../components/ComingSoon'
 
 export default class FirstContainer extends Component {
 
@@ -52,10 +53,11 @@ export default class FirstContainer extends Component {
     return (
       <Switch>
         <Route exact path='/' component={Homepage} />
-        <Route path='/signup' render={(routerProps) => <SignupPage {...routerProps} handleSubmit={this.handleSubmit} />} />
-        <Route path='/login' render={(routerProps) => <LoginPage {...routerProps} handleSubmit={this.handleSubmit} />} />
         <Route path='/map' render={(routerProps) => <Map {...routerProps} userInfo={this.state.user} />} />
         <Route path='/profile' render={(routerProps) => <ProfilePage {...routerProps} userInfo={this.state.user} />} />
+        <Route path='/about' render={(routerProps) => <ComingSoon {...routerProps} userInfo={this.state.user} />} />
+        {localStorage.token ? <Redirect to='/'/> : <Route path='/signup' render={(routerProps) => <SignupPage {...routerProps} handleSubmit={this.handleSubmit} />} />}
+        {localStorage.token ? <Redirect to='/'/> : <Route path='/login' render={(routerProps) => <LoginPage {...routerProps} handleSubmit={this.handleSubmit} />} />}
       </Switch>
     )
   }
