@@ -15,7 +15,7 @@ class MapInfoWindow extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.locationInfo !== prevProps.locationInfo) {
       let dishesId = this.props.locationInfo.relationships.national_dishes.data.map(dish => dish.id)
-      fetch('http://localhost:3000/national_dishes')
+      fetch('/national_dishes')
         .then(resp => resp.json())
         .then(dishes => {
           let foundDishes = dishes.data.filter(dish => {

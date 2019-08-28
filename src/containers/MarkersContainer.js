@@ -17,7 +17,7 @@ class MarkersContainer extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/locations')
+    fetch('/locations')
       .then(resp => resp.json())
       .then(locations => {
         locations.data.map(location => {
@@ -33,7 +33,7 @@ class MarkersContainer extends Component {
   }
 
   handleMarkerOnClick = (locationInfo) => {
-    fetch(`http://localhost:3000/locations/${locationInfo.id}`)
+    fetch(`/locations/${locationInfo.id}`)
       .then(resp => resp.json())
       .then(locationData => {
         let dishes = []

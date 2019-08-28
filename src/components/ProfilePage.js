@@ -10,7 +10,7 @@ class ProfilePage extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.userInfo !== prevProps.userInfo) {
-      fetch(`http://localhost:3000/comments`)
+      fetch(`/comments`)
         .then(resp => resp.json())
         .then(commentsData => {
           let userId = this.props.userInfo.id
@@ -25,7 +25,7 @@ class ProfilePage extends Component {
       console.log("edit")
       alert("Working on it!!!")
     } else if (e.target.name === 'delete') {
-      fetch(`http://localhost:3000/comments/${commentId}`, {
+      fetch(`/comments/${commentId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

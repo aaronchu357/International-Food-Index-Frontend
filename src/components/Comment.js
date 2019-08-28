@@ -7,7 +7,7 @@ export default class Comment extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000/comments/${this.props.commentId}`)
+    fetch(`/comments/${this.props.commentId}`)
       .then(resp => resp.json())
       .then(commentInfo => {
         this.setState({ comment: commentInfo.data.attributes })

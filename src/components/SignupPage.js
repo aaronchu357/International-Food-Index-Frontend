@@ -48,7 +48,7 @@ export default class SignupPage extends Component {
                     </div>
                     <div className="text-center">
                       <MDBBtn color="primary" onClick={this.handleSubmit}>Register <i className="fas fa-user-plus"></i></MDBBtn>
-                    </div>
+                    </div>2
                   </form>
                 </MDBCol>
                 <MDBCol md="3"></MDBCol>

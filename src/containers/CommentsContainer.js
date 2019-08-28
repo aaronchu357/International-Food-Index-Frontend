@@ -12,7 +12,7 @@ export default class CommentsContainer extends Component {
 
   componentDidMount() {
     console.log('comment container mount')
-    fetch(`http://localhost:3000/national_dishes/${this.props.nationalDishSelected.id}`)
+    fetch(`/national_dishes/${this.props.nationalDishSelected.id}`)
       .then(resp => resp.json())
       .then(nationalDish => {
         let allComments = []
@@ -26,7 +26,7 @@ export default class CommentsContainer extends Component {
   }
 
   handleCommentFormSubmit = (commentInfo) => {
-    fetch('http://localhost:3000/comments', {
+    fetch('/comments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

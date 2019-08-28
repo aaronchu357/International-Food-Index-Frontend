@@ -35,7 +35,7 @@ const TopNavBar = props => {
             placement="right"
           >
             <MDBBtn size="sm" color="primary" onClick={() => props.history.push('/map')} disabled={window.location.href === "http://localhost:3001/map" ? true : false}>Browse Map</MDBBtn>
-            <div>Sup</div>
+            <div>Explore</div>
           </MDBTooltip>
         </MDBNavbarNav>
 

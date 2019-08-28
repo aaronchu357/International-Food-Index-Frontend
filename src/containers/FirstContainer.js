@@ -16,7 +16,7 @@ export default class FirstContainer extends Component {
 
   componentDidMount() {
     if (localStorage.token) {
-      fetch('http://localhost:3000/profile', {
+      fetch('/profile', {
         headers: {
           Authorization: localStorage.token
         }
@@ -29,7 +29,7 @@ export default class FirstContainer extends Component {
   }
 
   handleSubmit = (userData, history, endpoint, alertMessage) => {
-    fetch(`http://localhost:3000/${endpoint}`, {
+    fetch(`/${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
