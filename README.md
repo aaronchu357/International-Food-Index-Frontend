@@ -1,73 +1,35 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# International Food Index README
 
-## Available Scripts
+## [Live Link](https://international-food-index.herokuapp.com/)
+## [Demo](https://youtu.be/fl_Fvsd9JyY)
 
-In the project directory, you can run:
+## Description
+International Food Index allows the user to browse or search for national dishes of different countries in an interactive map.
 
-### `npm start`
+## Technologies Used
+- Ruby on Rails backend with PostgreSQL database
+- React frontend
+- JWT
+- BCrypt
+- Fast JSON Api serializer
+- Create React App
+- React-Router
+- Google Map Platform’s Maps Javascript API
+- MDBootstrap
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-### Country Icons
-Icon made by Freepik from www.flaticon.com
-
-Amazing Free Icons 
+## Features
+ ### Search
+ The search bar receives the inputted country name and searches the database for a matching result.
+ 
+ <img src="https://media.giphy.com/media/QaZ6Lqs3R7V7XLC5Xl/giphy.gif" alt="search" width="700"/>
+ 
+ ### Information
+ Using a modal, more details about a national dish can be seen. Details include a longer description and an iframe with [Bing](https://www.bing.com/) search.
+ 
+ <img src="https://media.giphy.com/media/J6PvTE5sERdQs9or3h/giphy.gif" alt="more info" width="700"/>
+ <img src="https://media.giphy.com/media/h5pWIrOINlaK2V4NfK/giphy.gif" alt="recipe" width="700"/>
+ 
+ ### Comment
+ You are able to add comments to a dish and describe their experience with it, either trying to make it or having eaten it. 
+ 
+ <img src="https://media.giphy.com/media/jU2kkw7nRfQzALptfs/giphy.gif" alt="comment" width="700"/> 
